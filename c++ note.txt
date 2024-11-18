@@ -1,0 +1,9 @@
+expression: int x = y + 5
+
+Lvalue (locator value): objects that has addresses (x)
+Rvalue (temporary value): objects not has address (y + 5)
+Xvalue: std::move
+
+virtual base class: diamond inheritance ambiguity [https://stackoverflow.com/questions/21558/in-c-what-is-a-virtual-base-class]
+virtual function: runtime polymorphism
+static_cast vs dynamic_cast: dynamic has runtime casting validity check.

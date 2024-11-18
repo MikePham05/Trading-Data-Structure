@@ -1,0 +1,41 @@
+- Lock design:
+    - Correctness (data integrity)
+    - Fairness (thread starvation)
+    - Performance (resource management)
+        - Time (context switching, threads spinning waiting for locks, solved by waiting queue)
+        - Memory (space occupied by lock overhead)
+        
+- Classic locks:
+    - TestAndSet (correct, not very fair, costly on CPU cycles due to consumer spinning)
+    - Condition variable (parent, child thread)
+    - Semaphores (mechanism for both locks and condition variable):
+        - binary semaphores = locks
+        
+- Concurrent data structures (only talking about scalable ones here)
+    - Counter (aggregations): tradeoffs resources (context switching) <-> data validity duration
+    - Linked-list: 
+        - 1 lock for entire list (good when a lot of read)
+        - 1 lock for each node (good when a lot of update -> unlikely)
+    - Queue: 2 locks for each end
+    - Hash Table: Each concurrent linked list for each hash tables
+
+- Lock pattern:
+    - ReadWriteLock (producer consumer problems)
+    - SEQ-lock: few producers, many consumers pattern (optimistic locking)
+        - pattern:
+            - producer:
+                version v
+                v++;
+                write data;
+                v++
+            - consumer:
+                if v % 2 == 1:
+                    return
+                read data;
+        - trade-off:
+            - not time sensitive
+
+- Common bugs (lock design needs to be mindful about):
+    - atomicity violation
+    - ordering violation
+    - deadlock

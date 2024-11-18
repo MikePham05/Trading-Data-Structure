@@ -1,0 +1,100 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "Windows CPP build and run",
+            "command": "C:\\msys64\\mingw64\\bin\\g++.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build"
+            },
+            "detail": "Windows C++ task"
+        },
+        {
+            "type": "cppbuild",
+            "label": "MAC CPP build and run",
+            "command": "/usr/bin/g++",
+            "args": [
+                "-std=c++17",
+                "-fdiagnostics-color=always",
+                "-I/opt/homebrew/opt/boost/include",
+                "-L/opt/homebrew/opt/boost",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build"
+            },
+            "detail": "Mac C++ task"
+        },{
+            "type": "cppbuild",
+            "label": "(BENCHMARK) MAC CPP build and run",
+            "command": "/usr/bin/g++",
+            "args": [
+                "-std=c++17",
+                "-fdiagnostics-color=always",
+                "-isystem",
+                "benchmark/include",
+                "-Lbenchmark/build/src",
+                "-lbenchmark",
+                "-lpthread",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}",
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build"
+            },
+            "detail": "Mac C++ task"
+        },{
+            "label": "Remove Executable C++",
+            "type": "shell",
+            "command": "rm",
+            "args": [
+              "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "group": {
+              "kind": "build",
+              "isDefault": true,
+            },
+            "dependsOn": [
+              "(BENCHMARK) MAC CPP build and run"
+            ],
+            "presentation": {
+              "reveal": "never",
+              "panel": "shared"
+            },
+            "options": {
+              "cwd": "${fileDirname}"
+            }
+        }
+    ],
+    "version": "2.0.0"
+}
